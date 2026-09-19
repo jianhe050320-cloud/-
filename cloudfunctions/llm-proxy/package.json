@@ -1,0 +1,6 @@
+{
+  "name": "llm-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LLM 代理：把 DeepSeek 调用收口到服务端，密钥不下发到浏览器"
+}

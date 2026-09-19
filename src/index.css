@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    color: theme('colors.paper.DEFAULT');
+    background: theme('colors.night.900');
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+
+  input,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+
+  /* 输入框聚焦时用暖暖的琥珀描边，而不是系统蓝 */
+  input,
+  textarea {
+    outline: none;
+  }
+
+  ::selection {
+    background: rgba(201, 136, 74, 0.32);
+    color: theme('colors.ink.900');
+  }
+}
+
+@layer components {
+  /* 所有可点元素的统一按压反馈，让界面「活着」 */
+  .tap {
+    @apply transition-transform duration-150 ease-out active:scale-[0.97];
+  }
+
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 10px);
+  }
+
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 10px);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* 暖纸卡片：模拟纸面在灯下微微透光 */
+  .card-paper {
+    @apply rounded-3xl border border-paper-edge/70 bg-paper-warm shadow-paper;
+  }
+
+  /* 夜幕上的半透明浮层（AI观察抽屉、弹层） */
+  .glass-night {
+    @apply border border-paper/10 bg-night-700/90 backdrop-blur-xl;
+  }
+
+  /* AI 气泡：左对齐纸卡片 */
+  .bubble-ai {
+    @apply rounded-3xl rounded-tl-lg border border-paper-edge/70 bg-paper-warm text-ink-900 shadow-paper;
+  }
+
+  /* 用户气泡：右对齐琥珀渐变 */
+  .bubble-user {
+    @apply rounded-3xl rounded-br-lg bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-soft;
+  }
+
+  /* 长文纸页排版（故事正文）：行高给足，段与段之间留出呼吸 */
+  .reader {
+    @apply text-reader text-ink-900;
+  }
+
+  .reader p + p {
+    @apply mt-5;
+  }
+
+  .text-gradient-warm {
+    background-image: linear-gradient(120deg, #e7be8e 0%, #c9884a 52%, #94603a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* 移动端优先：430px 手机画布；宽屏下保持居中的手机列 */
+.phone-env {
+  min-height: 100dvh;
+  background:
+    radial-gradient(920px 540px at 16% -6%, rgba(201, 136, 74, 0.3), transparent 62%),
+    radial-gradient(780px 460px at 98% 10%, rgba(217, 164, 107, 0.2), transparent 60%),
+    radial-gradient(700px 620px at 50% 118%, rgba(110, 127, 168, 0.18), transparent 62%),
+    linear-gradient(160deg, #26211d 0%, #1e1a17 46%, #141110 100%);
+}
+
+.phone-shell {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  background: theme('colors.paper.DEFAULT');
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 520px) {
+  .phone-shell {
+    box-shadow: theme('boxShadow.shell');
+  }
+}
+
+/* AI 停顿的三个点 */
+.thinking-dot {
+  @apply inline-block h-1.5 w-1.5 rounded-full bg-ink-300;
+}
+.thinking-dot:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.thinking-dot:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
