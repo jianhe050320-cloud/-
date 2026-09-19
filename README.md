@@ -16,7 +16,8 @@ npm install
 npm run dev
 ```
 
-打开 https://hj-d5ggpl6f9e4e8453b-1484234591.tcloudbaseapp.com/。迅速体验完整功能
+打开 https://hj-d5ggpl6f9e4e8453b-1484234591.tcloudbaseapp.com/
+即可迅速体验「大学生的故事」完整功能
 
 ```bash
 npm run build      # 类型检查 + 构建
